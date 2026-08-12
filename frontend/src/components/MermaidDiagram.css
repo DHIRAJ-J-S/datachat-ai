@@ -1,0 +1,31 @@
+.mermaid-container {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin: 1rem 0;
+  backdrop-filter: blur(16px);
+}
+
+.mermaid-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.mermaid-content {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.mermaid-error {
+  color: #ef4444;
+  font-family: monospace;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+}

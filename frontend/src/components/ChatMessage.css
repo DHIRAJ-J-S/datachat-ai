@@ -1,0 +1,82 @@
+.message-row {
+  display: flex;
+  margin-bottom: 1.5rem;
+  animation: slideUp 0.3s ease-out;
+  width: 100%;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.message-row.user .message-bubble {
+  background: var(--accent-gradient);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message-row.assistant .message-bubble {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-bottom-left-radius: 4px;
+  width: 100%;
+}
+
+.message-tools {
+  margin-bottom: 1rem;
+}
+
+.tool-call {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.tool-header {
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.tool-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tool-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-indicator.running { background: #f59e0b; animation: pulse 1s infinite; }
+.status-indicator.completed { background: #10b981; }
+.status-indicator.error { background: #ef4444; }
+
+.tool-details {
+  padding: 1rem;
+  background: #000;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #a0a0b5;
+  border-top: 1px solid var(--border-subtle);
+}

@@ -1,0 +1,26 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.venv
+
+# Databases (Prevent committing large or sensitive DBs)
+*.db
+*.sqlite
+*.sqlite3
+!ecommerce.db # (Remove the '!' if you don't want the sample db committed)
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
