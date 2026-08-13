@@ -28,6 +28,21 @@ All of this happens in real-time with streaming responses — you see the AI thi
 
 ---
 
+## 📸 Screenshots
+
+- **Home Page / Database Upload:** Connect to the default database or upload your own SQLite file.
+  <br>![Home Page](docs/home.png)
+- **Chat Interface:** Ask questions in plain English and get instant data insights.
+  <br>![Chat Interface](docs/chat.png)
+- **Auto-Generated Charts:** Visualizations are rendered inline automatically.
+  <br>![Charts](docs/charts.png)
+- **Database Architecture:** Visualize schemas dynamically with Mermaid ER diagrams.
+  <br>![ER Diagram](docs/er_diagram.png)
+- **Interactive Dashboard:** Pin your favorite charts and flowcharts to a persistent dashboard.
+  <br>![Dashboard](docs/dashboard.png)
+
+---
+
 ## 🎯 Key Features
 
 | Feature | Description |
