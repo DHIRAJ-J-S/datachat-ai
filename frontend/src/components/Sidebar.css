@@ -117,12 +117,19 @@
 
 .clear-btn {
   width: 100%;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
 }
 .clear-btn:hover {
+  background: var(--bg-glass-hover);
   color: var(--text-primary);
 }

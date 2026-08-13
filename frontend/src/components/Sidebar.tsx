@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Plus, MessageSquare, Star, Trash2 } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Plus, MessageSquare, Star, Trash2, Download, Upload, Settings } from 'lucide-react';
 import { ChatSessionItem } from '../types';
 import './Sidebar.css';
 
@@ -10,13 +10,50 @@ interface Props {
   onSelectSession: (session: ChatSessionItem) => void;
   onToggleFavorite: (id: string) => void;
   onClearHistory: () => void;
+  onOpenSettings: () => void;
   isOpen: boolean;
 }
 
-export const Sidebar: React.FC<Props> = ({ history, currentSessionId, onNewChat, onSelectSession, onToggleFavorite, onClearHistory, isOpen }) => {
+export const Sidebar: React.FC<Props> = ({ history, currentSessionId, onNewChat, onSelectSession, onToggleFavorite, onClearHistory, onOpenSettings, isOpen }) => {
   const [tab, setTab] = useState<'all' | 'fav'>('all');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const filteredHistory = tab === 'all' ? history : history.filter(h => h.isFavorite);
+
+  const handleExport = () => {
+    const backupData = {
+      sessions: localStorage.getItem('datachat-sessions'),
+      dashboard: localStorage.getItem('datachat-dashboard')
+    };
+    const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `datachat-backup-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target?.result as string);
+        if (data.sessions) localStorage.setItem('datachat-sessions', data.sessions);
+        if (data.dashboard) localStorage.setItem('datachat-dashboard', data.dashboard);
+        alert('Data imported successfully! App will now reload.');
+        window.location.reload();
+      } catch (err) {
+        alert('Invalid backup file.');
+      }
+    };
+    reader.readAsText(file);
+  };
 
   return (
     <div className={`sidebar-container ${!isOpen ? 'collapsed' : ''}`}>
@@ -53,7 +90,17 @@ export const Sidebar: React.FC<Props> = ({ history, currentSessionId, onNewChat,
         ))}
       </div>
 
-      <div className="sidebar-footer">
+      <div className="sidebar-footer" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <button className="clear-btn" onClick={onOpenSettings}>
+          <Settings size={14} style={{ display: 'inline', marginRight: '0.5rem' }} /> Settings
+        </button>
+        <button className="clear-btn" onClick={handleExport}>
+          <Download size={14} style={{ display: 'inline', marginRight: '0.5rem' }} /> Export Data
+        </button>
+        <button className="clear-btn" onClick={() => fileInputRef.current?.click()}>
+          <Upload size={14} style={{ display: 'inline', marginRight: '0.5rem' }} /> Import Data
+        </button>
+        <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept=".json" onChange={handleImport} />
         <button className="clear-btn" onClick={onClearHistory}>
           <Trash2 size={14} style={{ display: 'inline', marginRight: '0.5rem' }} /> Clear History
         </button>

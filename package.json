@@ -1,0 +1,45 @@
+{
+  "name": "datachat-ai",
+  "version": "1.0.0",
+  "description": "Conversational AI for Database Intelligence",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.datachat.ai",
+    "productName": "DataChat AI",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "extraFiles": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!venv",
+          "!env",
+          "!__pycache__"
+        ]
+      },
+      {
+        "from": "frontend",
+        "to": "frontend",
+        "filter": [
+          "**/*",
+          "!node_modules"
+        ]
+      }
+    ]
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3",
+    "wait-on": "^9.1.0"
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataChat AI - Starting up...</title>
+  <style>
+    :root {
+      --bg-dark: #0f0f13;
+      --bg-panel: #1a1a24;
+      --text-main: #f3f4f6;
+      --text-dim: #9ca3af;
+      --accent: #8b5cf6;
+      --border: #374151;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 2rem;
+    }
+    .loader-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1.5rem auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 0.5rem 0;
+      font-weight: 600;
+    }
+    p#status {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin: 0;
+      min-height: 1.5rem;
+    }
+    details {
+      width: 100%;
+      max-width: 600px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    summary {
+      padding: 1rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      user-select: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+    }
+    summary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .terminal {
+      background: #000;
+      color: #fff;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8rem;
+      padding: 1rem;
+      height: 250px;
+      overflow-y: auto;
+      margin: 0;
+      border-top: 1px solid var(--border);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader-container">
+    <div class="spinner"></div>
+    <h1>DataChat AI</h1>
+    <p id="status">Initializing setup...</p>
+  </div>
+
+  <details>
+    <summary>Show Terminal Logs</summary>
+    <pre class="terminal" id="terminal-logs"></pre>
+  </details>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const logsEl = document.getElementById('terminal-logs');
+
+    window.electronAPI.onStatusUpdate((status) => {
+      statusEl.textContent = status;
+    });
+
+    window.electronAPI.onLogMessage((log) => {
+      logsEl.textContent += log + '\n';
+      // Auto-scroll to bottom
+      logsEl.scrollTop = logsEl.scrollHeight;
+    });
+  </script>
+</body>
+</html>

@@ -58,6 +58,9 @@ All of this happens in real-time with streaming responses, you see the AI thinki
 | 📤 **Database Upload** | Upload your own SQLite databases via drag-and-drop |
 | 📥 **CSV Export** | Export query results as downloadable CSV files |
 | 📸 **Image Export** | Download any chart, diagram, or table as a high-quality PNG image |
+| 🖥️ **Desktop App** | Standalone Windows executable with automated setup and splash screen |
+| ⚙️ **API Configuration** | In-app settings modal to easily switch between OpenAI, Anthropic, and Groq |
+| 💾 **Data Portability** | Export and import your entire chat history, favorites, and dashboards |
 
 ---
 
@@ -94,7 +97,20 @@ All of this happens in real-time with streaming responses, you see the AI thinki
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start (Desktop App)
+
+The easiest way to use DataChat AI is via the standalone Windows executable.
+
+1. Download `DataChat AI Setup 1.0.0.exe` from the Releases page.
+2. Run the installer. It will automatically install Python dependencies (pip) and Node dependencies (npm) in the background while showing a splash screen.
+3. On first launch, the app will prompt you to select your AI Provider (OpenAI, Anthropic, or Groq) and enter your API Key.
+4. You're ready to chat!
+
+---
+
+## 💻 Developer Setup (Manual)
+
+If you prefer to run the source code directly or are on macOS/Linux:
 
 ### Prerequisites
 
@@ -102,14 +118,13 @@ All of this happens in real-time with streaming responses, you see the AI thinki
 |-------------|----------------|----------|
 | Python | 3.11+ | [python.org](https://python.org/downloads) |
 | Node.js | 18+ | [nodejs.org](https://nodejs.org) |
-| API Key | At least **one** of the below | See links |
 
 **Supported LLM Providers** (you need at least one):
-- [OpenAI](https://platform.openai.com/api-keys) — Best tool-calling quality (`gpt-4o-mini`)
-- [Anthropic](https://console.anthropic.com/) — Claude models (`claude-3.5-sonnet`)
-- [Groq](https://console.groq.com/) — **Free tier available** (`llama-3.3-70b`) ← start here if unsure
+- [OpenAI](https://platform.openai.com/api-keys) - Best tool-calling quality (`gpt-4o-mini`)
+- [Anthropic](https://console.anthropic.com/) - Claude models (`claude-3.5-sonnet`)
+- [Groq](https://console.groq.com/) - **Free tier available** (`llama-3.3-70b`) <- start here if unsure
 
-### Step 1 — Clone & Configure
+### Step 1 - Clone & Configure
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/datachat-ai.git
@@ -121,13 +136,13 @@ cp .env.example .env
 
 Open `.env` in any text editor and paste your API key:
 ```env
-# Just fill in ONE of these — the app auto-detects which to use:
+# Just fill in ONE of these - the app auto-detects which to use:
 OPENAI_API_KEY=sk-your-key-here
 # ANTHROPIC_API_KEY=sk-ant-your-key-here
 # GROQ_API_KEY=gsk_your-key-here
 ```
 
-### Step 2 — Start the Backend
+### Step 2 - Start the Backend
 
 ```bash
 cd backend
@@ -146,15 +161,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-You should see:
-```
-INFO:     Uvicorn running on http://0.0.0.0:8000
-INFO:     DataChat AI backend started successfully
-```
-
-> The sample e-commerce database (50 customers, 20 products, 200 orders) is automatically created on first run.
-
-### Step 3 — Start the Frontend
+### Step 3 - Start the Frontend
 
 Open a **new terminal**:
 ```bash
@@ -167,13 +174,7 @@ npm install
 npm run dev
 ```
 
-You should see:
-```
-VITE v8.x.x  ready in XXX ms
-➜  Local:   http://localhost:5173/
-```
-
-### Step 4 — Open & Use
+### Step 4 - Open & Use
 
 Go to **http://localhost:5173** in your browser and start asking questions!
 
@@ -260,7 +261,7 @@ User Question
 | Tool | What It Does | Safety |
 |------|-------------|--------|
 | `get_schema` | Discovers all tables, columns, data types, and foreign keys | Read-only |
-| `execute_query` | Runs SQL queries against the database | **SELECT-only** — INSERT/UPDATE/DELETE/DROP blocked. 500 row limit. |
+| `execute_query` | Runs SQL queries against the database | **SELECT-only** - INSERT/UPDATE/DELETE/DROP blocked. 500 row limit. |
 | `generate_chart` | Creates chart JSON specs (bar, line, pie, scatter) | Output only |
 | `generate_flowchart` | Creates Mermaid diagram code (ER, flowchart, decision tree) | Output only |
 | `explain_data` | Triggers the LLM to analyze and explain query results | Prompt only |
@@ -272,8 +273,8 @@ User Question
 ```
 datachat-ai/
 ├── backend/
-│   ├── main.py              # FastAPI server — SSE streaming, upload, export endpoints
-│   ├── agent.py             # LLM agent loop — tool calling, system prompt, iteration
+│   ├── main.py              # FastAPI server - SSE streaming, upload, export endpoints
+│   ├── agent.py             # LLM agent loop - tool calling, system prompt, iteration
 │   ├── llm_client.py        # Multi-provider LLM client (OpenAI/Anthropic/Groq)
 │   ├── database.py          # SQLite connection manager & query executor
 │   ├── seed.sql             # Sample e-commerce data (50 customers, 200 orders)

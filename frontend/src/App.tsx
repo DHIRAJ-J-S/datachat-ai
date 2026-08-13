@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { ChatInterface } from './components/ChatInterface';
 import { Dashboard } from './components/Dashboard';
+import { SettingsModal } from './components/SettingsModal';
 import { useChat } from './hooks/useChat';
 import { useChatHistory } from './hooks/useChatHistory';
 import { DashboardItem, ChartSpec, ChatSessionItem } from './types';
@@ -14,9 +15,19 @@ function App() {
   const [dashboardItems, setDashboardItems] = useState<DashboardItem[]>([]);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const [dbName, setDbName] = useState<string>('ecommerce.db');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const { messages, sendMessage, isLoading, clearMessages, setMessages } = useChat(dbName);
   const { history, createSession, updateSession, toggleFavorite, clearHistory } = useChatHistory();
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(r => r.json())
+      .then(d => {
+        if (!d.has_key) setIsSettingsOpen(true);
+      })
+      .catch(console.error);
+  }, []);
 
   // Sync current messages to the active session
   useEffect(() => {
@@ -117,6 +128,7 @@ function App() {
         onSelectSession={handleSelectSession}
         onToggleFavorite={toggleFavorite}
         onClearHistory={clearHistory}
+        onOpenSettings={() => setIsSettingsOpen(true)}
       />
       <div className="main-content">
         <header className="app-header">
@@ -159,6 +171,11 @@ function App() {
           <Dashboard items={dashboardItems} onRemove={handleRemovePin} />
         )}
       </div>
+      <SettingsModal 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+        onSaved={() => {}} 
+      />
     </div>
   );
 }

@@ -11,7 +11,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, JSONResponse
-from dotenv import load_dotenv
+from dotenv import load_dotenv, set_key
 import uvicorn
 from pydantic import BaseModel
 from typing import List, Optional
@@ -59,6 +59,11 @@ app.add_middleware(
 class HistoryMessage(BaseModel):
     role: str
     content: str
+
+
+class SettingsData(BaseModel):
+    provider: str
+    api_key: Optional[str] = None
 
 
 class ChatRequest(BaseModel):
@@ -190,6 +195,45 @@ async def export_csv(request: ExportRequest):
         media_type="text/csv",
         headers={"Content-Disposition": "attachment; filename=datachat_export.csv"}
     )
+
+
+@app.get("/api/settings")
+async def get_settings():
+    provider = os.getenv("LLM_PROVIDER", "openai")
+    has_key = False
+    
+    if provider == "openai" and os.getenv("OPENAI_API_KEY") and "your-" not in os.getenv("OPENAI_API_KEY"):
+        has_key = True
+    elif provider == "anthropic" and os.getenv("ANTHROPIC_API_KEY") and "your-" not in os.getenv("ANTHROPIC_API_KEY"):
+        has_key = True
+    elif provider == "groq" and os.getenv("GROQ_API_KEY") and "your-" not in os.getenv("GROQ_API_KEY"):
+        has_key = True
+
+    return {"provider": provider, "has_key": has_key}
+
+@app.post("/api/settings")
+async def update_settings(data: SettingsData):
+    env_path = os.path.join(os.path.dirname(__file__), ".env")
+    
+    if not os.path.exists(env_path):
+        with open(env_path, "w") as f:
+            f.write("")
+            
+    set_key(env_path, "LLM_PROVIDER", data.provider)
+    os.environ["LLM_PROVIDER"] = data.provider
+    
+    if data.api_key:
+        if data.provider == "openai":
+            set_key(env_path, "OPENAI_API_KEY", data.api_key)
+            os.environ["OPENAI_API_KEY"] = data.api_key
+        elif data.provider == "anthropic":
+            set_key(env_path, "ANTHROPIC_API_KEY", data.api_key)
+            os.environ["ANTHROPIC_API_KEY"] = data.api_key
+        elif data.provider == "groq":
+            set_key(env_path, "GROQ_API_KEY", data.api_key)
+            os.environ["GROQ_API_KEY"] = data.api_key
+            
+    return {"status": "success"}
 
 
 @app.get("/api/health")
