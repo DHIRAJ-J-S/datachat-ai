@@ -57,6 +57,7 @@ All of this happens in real-time with streaming responses — you see the AI thi
 | 📜 **Query History** | Full history with timestamps, favorites, and re-run capability |
 | 📤 **Database Upload** | Upload your own SQLite databases via drag-and-drop |
 | 📥 **CSV Export** | Export query results as downloadable CSV files |
+| 📸 **Image Export** | Download any chart, diagram, or table as a high-quality PNG image |
 
 ---
 
