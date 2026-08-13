@@ -2,7 +2,7 @@
 
 **Conversational AI for Natural Language Database Intelligence**
 
-Ask questions about your database in plain English. Get instant SQL queries, interactive charts, ER diagrams, and conversational insights — all through a ChatGPT-like streaming interface.
+Ask questions about your database in plain English. Get instant SQL queries, interactive charts, ER diagrams, and conversational insights, all through a ChatGPT-like streaming interface.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
@@ -24,7 +24,7 @@ The AI agent autonomously:
 3. **Generates** an interactive bar chart from the results
 4. **Explains** the key insights in plain English
 
-All of this happens in real-time with streaming responses — you see the AI thinking, calling tools, and building the answer step by step.
+All of this happens in real-time with streaming responses, you see the AI thinking, calling tools, and building the answer step by step.
 
 ---
 
@@ -47,12 +47,12 @@ All of this happens in real-time with streaming responses — you see the AI thi
 
 | Feature | Description |
 |---------|-------------|
-| 💬 **Natural Language Queries** | Ask data questions in plain English — no SQL knowledge needed |
+| 💬 **Natural Language Queries** | Ask data questions in plain English, no SQL knowledge needed |
 | 📊 **Auto-Generated Charts** | Bar, line, pie, and scatter charts rendered inline from query results |
 | 📐 **Diagram Generation** | ER diagrams, process flowcharts, and decision trees via Mermaid.js |
-| 🔍 **SQL Transparency** | See the generated SQL before execution — learn as you query |
+| 🔍 **SQL Transparency** | See the generated SQL before execution, learn as you query |
 | 🤖 **Multi-LLM Support** | OpenAI → Anthropic → Groq automatic fallback chain |
-| ⚡ **Real-Time Streaming** | SSE-powered streaming — see the AI think and respond in real-time |
+| ⚡ **Real-Time Streaming** | SSE-powered streaming, see the AI think and respond in real-time |
 | 📌 **Dashboard Builder** | Pin any chart or diagram to a persistent dashboard |
 | 📜 **Query History** | Full history with timestamps, favorites, and re-run capability |
 | 📤 **Database Upload** | Upload your own SQLite databases via drag-and-drop |
