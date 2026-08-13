@@ -10,6 +10,10 @@ Ask questions about your database in plain English. Get instant SQL queries, int
 ![SQLite](https://img.shields.io/badge/SQLite-3-003B57?style=flat-square&logo=sqlite&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat-square&logo=typescript&logoColor=white)
 
+<br>
+
+[![Download for Windows](https://img.shields.io/badge/Download_for_Windows-v1.0.0-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/DHIRAJ-J-S/datachat-ai/releases/latest)
+
 ---
 
 ## ✨ What It Does
@@ -127,7 +131,7 @@ If you prefer to run the source code directly or are on macOS/Linux:
 ### Step 1 - Clone & Configure
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/datachat-ai.git
+git clone https://github.com/DHIRAJ-J-S/datachat-ai.git
 cd datachat-ai
 
 # Create your environment file
