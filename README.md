@@ -2,11 +2,11 @@
 
 > **Sairam Student Hackathon 2026 Submission**  
 > **Team Name:** Claudiators  
-> - **Dhiraj J S** (Team Lead) — SIT24EC104  
-> - **M A FAWAZ** — SIT24EC097  
-> - **S R NAVEEN** — SIT24EC057  
-> - **MITHRA NIRANJAN P** — SIT24EC077  
-> - **KOSILARAJAN R** — SIT24EC110  
+> - **DHIRAJ J S** - SIT24EC104  
+> - **M A FAWAZ** - SIT24EC097  
+> - **S R NAVEEN** - SIT24EC057  
+> - **MITHRA NIRANJAN P** - SIT24EC077  
+> - **KOSILARAJAN R** - SIT24EC110  
 
 **Conversational AI for Natural Language Database Intelligence**
 
